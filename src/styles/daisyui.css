@@ -1,0 +1,12 @@
+@tailwind components;
+
+
+@layer components {
+  .card-body {
+    @apply bg-gray-50
+  }
+  .card-title {
+    @apply text-base
+  }
+
+}
