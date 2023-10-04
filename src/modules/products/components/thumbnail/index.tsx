@@ -19,7 +19,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
   return (
     <div
-      className={clsx("relative aspect-[29/34]", {
+      className={clsx("relative aspect-[29/22]", {
         "w-[180px]": size === "small",
         "w-[290px]": size === "medium",
         "w-[440px]": size === "large",
@@ -44,7 +44,7 @@ const ImageOrPlaceholder = ({
       fill
       sizes="100vw"
       style={{
-        objectFit: "cover",
+        objectFit: "contain",
         objectPosition: "center",
       }}
     />

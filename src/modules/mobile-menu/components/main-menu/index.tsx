@@ -36,7 +36,7 @@ const MainMenu = () => {
           </button>
         </div>
         <div>
-          <h1 className="text-xl-semi uppercase">Acme</h1>
+          <h1 className="text-xl-semi uppercase">Cartago4x4</h1>
         </div>
         <div className="flex-1 basis-0 flex justify-end">
           <button onClick={close}>
@@ -67,7 +67,7 @@ const MainMenu = () => {
                   onClick={close}
                 >
                   <span className="sr-only">Go to Store</span>
-                  <span>Store</span>
+                  <span>Productos</span>
                   <ChevronDown className="-rotate-90" />
                 </button>
               </Link>
