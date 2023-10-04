@@ -2,6 +2,7 @@ import clsx from "clsx"
 import Link from "next/link"
 import { ProductPreviewType } from "types/global"
 import Thumbnail from "../thumbnail"
+import ProductPreviewPrice from "../product-preview-price"
 
 const ProductPreview = ({
   title,
@@ -11,29 +12,17 @@ const ProductPreview = ({
 }: ProductPreviewType) => {
   return (
     <Link href={`/products/${handle}`}>
-      <div>
-        <Thumbnail thumbnail={thumbnail} size="full" />
-        <div className="text-base-regular mt-2">
-          <span>{title}</span>
-          <div className="flex items-center gap-x-2 mt-1">
-            {price ? (
-              <>
-                {price.price_type === "sale" && (
-                  <span className="line-through text-gray-500">
-                    {price.original_price}
-                  </span>
-                )}
-                <span
-                  className={clsx("font-semibold", {
-                    "text-rose-500": price.price_type === "sale",
-                  })}
-                >
-                  {price.calculated_price}
-                </span>
-              </>
-            ) : (
-              <div className="w-20 h-6 animate-pulse bg-gray-100"></div>
-            )}
+      <div className="card bg-base-100 shadow-xl">
+        <figure>
+          <Thumbnail thumbnail={thumbnail} size="full" />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">
+            {title}
+            {/* <div className="badge badge-secondary">{tags}</div> */}
+          </h2>
+          <div className="card-actions justify-start">
+            <ProductPreviewPrice price={price} />
           </div>
         </div>
       </div>

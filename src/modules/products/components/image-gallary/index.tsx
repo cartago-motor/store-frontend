@@ -40,7 +40,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 fill
                 sizes="100vw"
                 style={{
-                  objectFit: "cover",
+                  objectFit: "contain",
                 }}
               />
             </button>
@@ -53,7 +53,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             <div
               ref={(image) => imageRefs.current.push(image)}
               key={image.id}
-              className="relative aspect-[29/34] w-full"
+              className="relative aspect-[29/22] w-full"
               id={image.id}
             >
               <Image
@@ -64,7 +64,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 fill
                 sizes="100vw"
                 style={{
-                  objectFit: "cover",
+                  objectFit: "contain",
                 }}
               />
             </div>

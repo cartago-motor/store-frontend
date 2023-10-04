@@ -18,7 +18,7 @@ const SkeletonProductPage = () => {
                 return (
                   <div
                     key={index}
-                    className="relative aspect-[29/34] w-full bg-gray-100"
+                    className="relative aspect-[29/22] w-full bg-gray-100"
                   ></div>
                 )
               })}

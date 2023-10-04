@@ -53,12 +53,14 @@ export type ProductPreviewType = {
   title: string
   handle: string | null
   thumbnail: string | null
-  price?: {
-    calculated_price: string
-    original_price: string
-    difference: string
-    price_type: "default" | "sale"
-  }
+  price?: ProductPreviewPrice,  
+}
+
+export type ProductPreviewPrice = {
+  calculated_price: string
+  original_price: string
+  difference: string
+  price_type: "default" | "sale"
 }
 
 export type InfiniteProductPage = {
