@@ -28,7 +28,7 @@ Combine Medusa's modules for your commerce backend with the newest Next.js 13 fe
 </p>
 
 ### Prerequisites
-To use the starter you should have a Medusa server running locally on port 9000.
+To use the [Next.js Starter Template](https://medusajs.com/nextjs-commerce/), you should have a Medusa server running locally on port 9000.
 For a quick setup, run: 
 ```shell
 npx create-medusa-app@latest
@@ -124,6 +124,8 @@ Make sure the Medusa backend is running, then start (or restart) your Next.js st
 Done! All product and collection data should now be coming from the module. The Product Module routes are all in `src/app/api` for you to edit and play around with.
 
 To opt out of using the product module, simply set the `productModule` feature flag to `false` and restart the server.
+
+Deploying to Vercel? If you're not planning on using the serverless modules, you might encounter errors when deploying to Vercel. You can safely delete or exclude the `src/app/api` folder before deploying. The API routes are only used by the serverless modules.
 
 # Payment integrations
 

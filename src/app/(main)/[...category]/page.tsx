@@ -4,15 +4,12 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 type Props = {
-  params: {
-    category: string
-    subcategory: string
-  }
+  params: { category: string[] }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { product_categories } = await getCategoryByHandle(
-    `${params.category}/${params.subcategory}`
+    params.category
   ).catch((err) => {
     notFound()
   })
@@ -26,13 +23,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const { product_categories, parent } = await getCategoryByHandle(
-    `${params.category}/${params.subcategory}`
+  const { product_categories } = await getCategoryByHandle(
+    params.category
   ).catch((err) => {
     notFound()
   })
 
-  const category = product_categories[0]
-
-  return <CategoryTemplate category={category} parent={parent} />
+  return <CategoryTemplate categories={product_categories} />
 }
