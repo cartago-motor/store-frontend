@@ -23,6 +23,9 @@ module.exports = {
         "xlarge": "1680px",
         "2xlarge": "1920px",
       },
+      fontSize: {
+        "2xs": "0.55rem"
+      },
       fontFamily: {
         sans: [
           "Inter",
@@ -37,7 +40,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('@tailwindcss/aspect-ratio')],
   daisyui: {
     themes: ["winter", "corporate"],
   },

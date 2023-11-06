@@ -5,10 +5,11 @@ import repeat from "@lib/util/repeat"
 import { StoreGetProductsParams } from "@medusajs/medusa"
 import ProductPreview from "@modules/products/components/product-preview"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { useCart } from "medusa-react"
 import { useEffect, useMemo } from "react"
 import { useInView } from "react-intersection-observer"
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { GridTileImage } from "../grid-tile-image"
 
 type InfiniteProductsType = {
   params: StoreGetProductsParams
@@ -57,32 +58,15 @@ const InfiniteProducts = ({ params }: InfiniteProductsType) => {
   }, [inView, hasNextPage])
 
   return (
-    <div className="flex-1 content-container">
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8 flex-1">
-        {previews.map((p) => (
-          <li key={p.id}>
-            <ProductPreview {...p} />
-          </li>
-        ))}
-        {isLoading &&
-          !previews.length &&
-          repeat(8).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
+    <div className="bg-grey">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="sr-only">Products</h2>
+
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {previews.map((product) => (
+            <GridTileImage key={product.id} {...product}></GridTileImage>
           ))}
-        {isFetchingNextPage &&
-          repeat(getNumberOfSkeletons(data?.pages)).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-      </ul>
-      <div
-        className="py-16 flex justify-center items-center text-small-regular text-gray-700"
-        ref={ref}
-      >
-        <span ref={ref}></span>
+        </div>
       </div>
     </div>
   )

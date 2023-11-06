@@ -1,15 +1,15 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react"
 import { ProductProvider } from "@lib/context/product-context"
 import { useIntersection } from "@lib/hooks/use-in-view"
-import ProductInfo from "@modules/products/templates/product-info"
-import ProductTabs from "@modules/products/components/product-tabs"
-import RelatedProducts from "@modules/products/components/related-products"
-import ImageGallery from "@modules/products/components/image-gallary"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+import ImageGallery from "@modules/products/components/image-gallery"
 import MobileActions from "@modules/products/components/mobile-actions"
 import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+import ProductTabs from "@modules/products/components/product-tabs"
+import RelatedProducts from "@modules/products/components/related-products"
+import ProductInfo from "@modules/products/templates/product-info"
+import React, { useEffect, useRef, useState } from "react"
 
 type ProductTemplateProps = {
   product: PricedProduct

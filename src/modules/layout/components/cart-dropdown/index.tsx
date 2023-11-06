@@ -1,4 +1,8 @@
+"use client"
+
+
 import { Popover, Transition } from "@headlessui/react"
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { useCartDropdown } from "@lib/context/cart-dropdown-context"
 import { useStore } from "@lib/context/store-context"
 import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items"
@@ -11,6 +15,7 @@ import { formatAmount, useCart } from "medusa-react"
 import Link from "next/link"
 import { Fragment } from "react"
 
+
 const CartDropdown = () => {
   const { cart, totalItems } = useCart()
   const items = useEnrichedLineItems()
@@ -19,9 +24,19 @@ const CartDropdown = () => {
 
   return (
     <div className="h-full z-50" onMouseEnter={open} onMouseLeave={close}>
-      <Popover className="relative h-full">
-        <Popover.Button className="h-full">
-          <Link href="/cart">{`My Bag (${totalItems})`}</Link>
+      <Popover className="flex items-center h-full">
+        <Popover.Button className="border p-2 rounded hover:border-gray-700">
+          <Link href="/cart">
+            <div className="relative">
+              <ShoppingCartIcon
+                className='h-4 transition-all ease-in-out hover:scale-110'
+              />
+              {totalItems > 0 &&
+                <div
+                  className="absolute inline-flex items-center justify-center w-5 h-5 text-2xs font-bold text-white bg-blue-500 border-2 border-white rounded-full -top-5 left-3 dark:border-gray-900">{totalItems}
+                </div>}
+            </div>
+          </Link>
         </Popover.Button>
         <Transition
           show={state}

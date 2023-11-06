@@ -1,27 +1,30 @@
 "use client"
 
-import usePreviews from "@lib/hooks/use-previews"
 import {
   ProductCategoryWithChildren,
   getProductsByCategoryHandle,
 } from "@lib/data"
+import usePreviews from "@lib/hooks/use-previews"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
+import { ProductCategory } from "@medusajs/medusa"
+import CategoryTemplate from "@modules/category/template"
+import UnderlineLink from "@modules/common/components/underline-link"
+import ProductGridItems from "@modules/products/components/product-grid-items"
 import ProductPreview from "@modules/products/components/product-preview"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useCart } from "medusa-react"
+import Link from "next/link"
+import { notFound } from "next/navigation"
 import React, { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import Link from "next/link"
-import UnderlineLink from "@modules/common/components/underline-link"
-import { notFound } from "next/navigation"
 
-type CategoryTemplateProps = {
+type CategoriesTemplateProps = {
   categories: ProductCategoryWithChildren[]
 }
 
-const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
+const CategoriesTemplate: React.FC<CategoriesTemplateProps> = ({ categories }) => {
   const { cart } = useCart()
   const { ref, inView } = useInView()
 
@@ -33,7 +36,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
   const {
     data: infiniteData,
     hasNextPage,
-    fetchNextPage,
+    fetchNextPage,    
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery(
@@ -68,6 +71,19 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasNextPage])
 
+
+  const columns = categories.length < 4 ? categories.length : 4
+
+  const skeletons = () =>
+  (<ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8">
+    {
+      repeat(getNumberOfSkeletons(infiniteData?.pages)).map((index) => (
+        <li key={index}>
+          <SkeletonProductPreview />
+        </li>
+      ))
+    }
+  </ul>)
   return (
     <div className="content-container py-6">
       <div className="flex flex-row mb-8 text-2xl-semi gap-4">
@@ -90,38 +106,29 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
           <p>{category.description}</p>
         </div>
       )}
-      {category.category_children && (
+      {category.category_children.length > 0 ? (
         <div className="mb-8 text-base-large">
-          <ul className="grid grid-cols-1 gap-2">
-            {category.category_children?.map((c) => (
-              <li key={c.id}>
-                <UnderlineLink href={`/${c.handle}`}>{c.name}</UnderlineLink>
-              </li>
-            ))}
+          <ul className={`grid sm:grid-cols-3 lg:grid-cols-${columns} gap-x-2`} >
+            {
+              category.category_children?.map((productCategory: ProductCategory) => (
+                <li className="mb-6" key={productCategory.id}>
+                  <CategoryTemplate handle={productCategory.handle} name={productCategory.name} description={productCategory.description} />
+                </li>
+              ))
+            }
           </ul>
         </div>
-      )}
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8">
-        {previews.map((p) => (
-          <li key={p.id}>
-            <ProductPreview {...p} />
-          </li>
-        ))}
-        {isFetchingNextPage &&
-          repeat(getNumberOfSkeletons(infiniteData?.pages)).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-      </ul>
+      ) :
+        isFetchingNextPage ? skeletons() : (<ProductGridItems products={previews} />)
+      }
       <div
         className="py-16 flex justify-center items-center text-small-regular text-gray-700"
         ref={ref}
       >
         <span ref={ref}></span>
       </div>
-    </div>
+    </div >
   )
 }
 
-export default CategoryTemplate
+export default CategoriesTemplate

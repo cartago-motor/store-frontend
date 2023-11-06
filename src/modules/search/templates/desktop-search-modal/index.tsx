@@ -1,3 +1,4 @@
+'use client'
 import useToggleState from "@lib/hooks/use-toggle-state"
 import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
 import Modal from "@modules/common/components/modal"
