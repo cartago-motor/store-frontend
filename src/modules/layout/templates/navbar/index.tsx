@@ -4,8 +4,9 @@ import MenuNav from '@modules/layout/components/menu';
 import DesktopSearchModal from '@modules/search/templates/desktop-search-modal';
 import Link from 'next/link';
 import { Menu } from 'types/menu';
-import MobileMenu from './mobile-menu';
+
 import Search from './search';
+import MobileMenu from "@modules/mobile-menu/templates";
 const { SITE_NAME } = process.env;
 
 const menu: Menu = [
@@ -21,19 +22,19 @@ const menu: Menu = [
 export default function Navbar() {
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+    <nav className="relative flex items-center justify-between p-4 lg:px-6 bg-gray-800">
       <div className="block flex-none md:hidden">
-        <MobileMenu menu={menu} />
+        <MobileMenu />
       </div>
       <div className="flex w-full items-center">
         <div className="flex w-full md:w-1/3">
           <Link
             href="/"
-            aria-label="Go back home"
+            aria-label="Cartago4x4 home"
             className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
           >
             <LogoCartago />
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
+            <div className="mx-4 flex-none text-lg text-white font-medium uppercase md:hidden lg:block">
               {SITE_NAME}
             </div>
           </Link>

@@ -13,9 +13,9 @@ const DesktopSearchModal = () => {
 
   return (
     <>
-      <button onClick={open} className="flex items-center gap-x-2 h-full">
-        <Search />
-        Search
+      <button onClick={open} className="flex items-center gap-x-2 h-full border border-gray-200 hover:border-gray-400 w-full p-2 rounded">
+        <Search className="text-neutral-50"/>
+        <span className="text-neutral-50">Buscar piezas</span>
       </button>
 
       <Modal isOpen={state} close={close} size="large">

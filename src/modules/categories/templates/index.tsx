@@ -36,7 +36,7 @@ const CategoriesTemplate: React.FC<CategoriesTemplateProps> = ({ categories }) =
   const {
     data: infiniteData,
     hasNextPage,
-    fetchNextPage,    
+    fetchNextPage,
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery(
@@ -71,8 +71,8 @@ const CategoriesTemplate: React.FC<CategoriesTemplateProps> = ({ categories }) =
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasNextPage])
 
-
-  const columns = categories.length < 4 ? categories.length : 4
+  const categoryChildren = category?.category_children
+  const columns = categoryChildren.length < 4 ? categoryChildren.length : 4
 
   const skeletons = () =>
   (<ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8">
@@ -106,11 +106,11 @@ const CategoriesTemplate: React.FC<CategoriesTemplateProps> = ({ categories }) =
           <p>{category.description}</p>
         </div>
       )}
-      {category.category_children.length > 0 ? (
+      {categoryChildren.length > 0 ? (
         <div className="mb-8 text-base-large">
           <ul className={`grid sm:grid-cols-3 lg:grid-cols-${columns} gap-x-2`} >
             {
-              category.category_children?.map((productCategory: ProductCategory) => (
+              categoryChildren?.map((productCategory: ProductCategory) => (
                 <li className="mb-6" key={productCategory.id}>
                   <CategoryTemplate handle={productCategory.handle} name={productCategory.name} description={productCategory.description} />
                 </li>

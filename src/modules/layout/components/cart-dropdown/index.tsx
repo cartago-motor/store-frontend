@@ -25,11 +25,11 @@ const CartDropdown = () => {
   return (
     <div className="h-full z-50" onMouseEnter={open} onMouseLeave={close}>
       <Popover className="flex items-center h-full">
-        <Popover.Button className="border p-2 rounded hover:border-gray-700">
+        <Popover.Button className="border p-2 rounded hover:border-gray-700 bg-white">
           <Link href="/cart">
             <div className="relative">
               <ShoppingCartIcon
-                className='h-4 transition-all ease-in-out hover:scale-110'
+                className='h-4 transition-all ease-in-out hover:scale-110 text-gray-800'
               />
               {totalItems > 0 &&
                 <div

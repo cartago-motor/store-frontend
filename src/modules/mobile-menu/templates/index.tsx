@@ -1,3 +1,4 @@
+'use client'
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
 import Container from "@modules/mobile-menu/components/container"
 import MainMenu from "@modules/mobile-menu/components/main-menu"
